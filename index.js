@@ -63,3 +63,10 @@ app.get('/db', function(request, response){
 		});
 	});
 });
+
+app.use(bodyParser.raw({type: function(){return true;}, limit: '5mb'}));
+  app.listen(8001, function(){
+      //Note: /wsdl route will be handled by soap module 
+      //and all other routes & middleware will continue to work 
+      soap.listen(app, '/wsdl', service, xml);
+  });
