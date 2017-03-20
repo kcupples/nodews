@@ -23,7 +23,7 @@ app.get('/db', function(request, response){
 				response.send("Error: " + err);
 			}
 			else {
-				response.render('pages/db', {results: result.rows})
+				response.send(result.rows);
 			}
 		});
 	});
