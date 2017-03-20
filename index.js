@@ -31,4 +31,4 @@ app.get('/db', function(request, response){
 	});
 });
 
-app.use('/soap', require('./lib/soaplistener.js')());
+//app.use('/soap', require('./lib/soaplistener.js')());
