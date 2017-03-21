@@ -77,6 +77,7 @@ var MyService = {
 				Items: {Item: itemsObject}
 					
 				};
+				console.log('Calculated Price: ' +JSON.stringify(itemsObject));
 			}
 		}
 	}
