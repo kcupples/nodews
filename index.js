@@ -62,7 +62,7 @@ var MyService = {
 					});
 				return {
 
-				Items: {Item: dbResults}
+				Items: {Item: itemsObject}
 					
 				};
 			}
