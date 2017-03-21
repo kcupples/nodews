@@ -73,7 +73,7 @@ var MyService = {
 
 								}
 								console.log('Calculated Price: ' +JSON.stringify(itemsObject));
-								console.log('Calculated Price: ' +JSON.stringify(pricedObject));
+								console.log('Calculated Price: ' +JSON.stringify(pricedItems));
 							}
 						});
 
