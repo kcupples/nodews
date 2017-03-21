@@ -28,7 +28,6 @@ var MyService = {
 				var resultString = '';
 				var dbResults;
 				
-				
 				console.log('Length: ' + length);
 
 				for (var i=0; i<length; i++){
@@ -48,6 +47,7 @@ var MyService = {
 				queryString = ('SELECT SKU, PRICE from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' +"'" + args.getQuoteOperationRequest.CustomerNumber.$value +"'" + ' AND SALESORG=' +"'" + args.getQuoteOperationRequest.SalesOrg.$value +"'" + ' AND SKU IN (' +SKUList+')');
 				console.log(queryString);
 
+				//Connect to the Database
 				pg.connect(process.env.DATABASE_URL, function(err, client, done){
 						client.query(queryString, function(err, result){
 							if (err){
@@ -72,12 +72,15 @@ var MyService = {
 						});
 
 					});
+				setTimeout(function() {
+    				console.log('Blah blah blah blah extra-blah');
+				}, 3000);
 				return {
 
 				Items: {Item: itemsObject}
 					
 				};
-				
+
 			}
 		}
 	}
