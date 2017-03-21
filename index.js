@@ -18,9 +18,40 @@ var MyService = {
 	getQuote: {
 		getQuoteSOAP : {
 			getQuoteOperation: function(args) {
-				console.log('GotIt');
+				console.log('In Web Service:');
+				
+				//Build SQL Statement from Arguments Passed
+				var length = args.getQuoteOperationRequest.Items.length;
+				var SKUList='';
+				var queryString ='';
+				var resultString = '';
+				
+				console.log('Length: ' + length);
+
+				for (var i=0; i<length; i++){
+					SKUList += args.getQuoteOperationRequest.Items[i].SKU.$value + ',';
+					console.log(i);
+					console.log(SKUList);
+				}
+				SKUList = SKUList.substring(0, SKUList.length-1);
+				console.log(SKUList);
+				queryString = ('SELECT PRICE, SKU from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' + args.getQuoteOperationRequest.CustomerNumber.$value + ' AND SALESORG=' + args.getQuoteOperationRequest.SalesOrg.$value + ' AND SKU IN (' +SKUList+')');
+				console.log(queryString);
+
+				pg.connect(process.env.DATABASE_URL, function(err, client, done){
+						client.query(queryString, function(err, result){
+							if (err){
+								console.error('DB Error: ' + err);
+								response.send("Error: " + err);
+							}
+							else{
+								resultString = JSON.stringify(result.rows)
+							}
+						});
+
+					});
 				return {
-				Items: {Item: [{SKU:55555,Quantity:5,Price: 524}, {SKU:66666,Quantity:6,Price: 625}]}
+				Items: {Item: [resultString]}
 					
 				};
 			}
