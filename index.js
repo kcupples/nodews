@@ -86,19 +86,7 @@ var MyService = {
 	}
 };
 
- var service = {
-      Hello_Service: {
-        Hello_Port: {
-          sayHello: function (args) {
-          	console.log("test");
-            return {
-              greeting: args.firstName
-            };
-          }
-        }
-      }
-    };
-
+ 
   server = app.listen((process.env.PORT || 5000), function () {
       //var soapServer = soap.listen(app, '/SayHello', service, wsdl);
       var soapServer = soap.listen(app, '/getQuoteOperation', MyService, xml);
