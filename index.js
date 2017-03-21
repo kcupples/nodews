@@ -3,6 +3,7 @@ var app = express();
 var pg = require('pg');
 var soap = require('soap');
 var url;
+var itemsObject =[];
 
 
 //get the WSDL to pass to the SOAP listener
@@ -26,8 +27,7 @@ var MyService = {
 				var queryString ='';
 				var resultString = '';
 				var dbResults;
-				var itemsObject =[];
-				var pricedItems =[];
+				
 				
 				console.log('Length: ' + length);
 
@@ -63,29 +63,18 @@ var MyService = {
 									console.log('Db: '+ dbResults[i].sku);
 									if (itemsObject[i].SKU == dbResults[i].sku){
 										console.log('Match');
-										pricedItems.push( {
-											Quantity: itemsObject[i].Quantity,
-											Price: itemsObject[i].Quantity * dbResults[i].price,
-											SKU: itemsObject[i].SKU
-										});
 										itemsObject[i].Price = (itemsObject[i].Quantity * dbResults[i].price).toString();
 									}
 
 								}
 								console.log('Calculated Price: ' +JSON.stringify(itemsObject));
-								console.log('Calculated Price: ' +JSON.stringify(pricedItems));
-								return {
-
-				Items: {Item: pricedItems}
-					
-				};
 							}
 						});
 
 					});
 				return {
 
-				Items: {Item: pricedItems}
+				Items: {Item: itemsObject}
 					
 				};
 			}
