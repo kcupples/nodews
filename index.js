@@ -56,7 +56,7 @@ var MyService = {
 								dbResults = result.rows;
 								resultString = JSON.stringify(result.rows);
 								console.log('Returning: ' +resultString);
-								for (var i; i<itemsObject.length; i++){
+								for (var i=0; i<itemsObject.length; i++){
 									console.log(i);
 									console.log('Object: ' + itemsObject[i].SKU);
 									console.log('Db: '+ dbResults[i].sku);
