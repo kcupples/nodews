@@ -97,7 +97,7 @@ server = app.listen((process.env.PORT || 5000), function () {
 
 //Set the Home Page
 app.get('/', function (request, response) {
-   response.send("Hi There");
+   response.send('<h1>SOAP Quote Generator </h1><p>PostGres database contains customer specific pricing</p><p><a href="/db">click here</a> for a list of records</p><p><a href="https://sleepy-castle-97478.herokuapp.com/getQuoteOperation?wsdl">click here</a> for the WSDL</p>');
 });
 
 //Send the WSDL when requested
