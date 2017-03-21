@@ -57,7 +57,7 @@ var MyService = {
 								resultString = JSON.stringify(result.rows);
 								console.log('Returning: ' +resultString);
 								for (var i; i<itemsObject.length; i++){
-									if (itemsObject[i].SKU = dbResults[i].sku){
+									if (itemsObject[i].SKU == dbResults[i].sku){
 										itemsObject[i].Price = itemsObject[i].Quantity * dbResults.price;
 									}
 
