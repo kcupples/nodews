@@ -3,8 +3,6 @@ var app = express();
 var pg = require('pg');
 var soap = require('soap');
 var url;
-var itemsObject =[];
-
 
 //get the WSDL to pass to the SOAP listener
 var xml = require('fs').readFileSync('./wsdl/getQuoteWorking.wsdl', 'utf8');
@@ -27,6 +25,8 @@ var MyService = {
 				var queryString ='';
 				var resultString = '';
 				var dbResults;
+				var itemsObject =[];
+
 				
 				console.log('Length: ' + length);
 
