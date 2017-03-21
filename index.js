@@ -7,7 +7,6 @@ var url;
 //get the WSDL to pass to the SOAP listener
 var xml = require('fs').readFileSync('./wsdl/getQuoteWorking.wsdl', 'utf8');
 
-var wsdl = '<definitions name="HelloService" targetNamespace="http://www.examples.com/wsdl/HelloService.wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.examples.com/wsdl/HelloService.wsdl" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><message name="SayHelloRequest"><part name="firstName" type="xsd:string"/></message><message name="SayHelloResponse"><part name="greeting" type="xsd:string"/></message><portType name="Hello_PortType"><operation name="sayHello"><input message="tns:SayHelloRequest"/><output message="tns:SayHelloResponse"/></operation></portType><binding name="Hello_Binding" type="tns:Hello_PortType"><soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/><operation name="sayHello"><soap:operation soapAction="sayHello"/><input><soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:examples:helloservice" use="encoded"/></input><output><soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:examples:helloservice" use="encoded"/></output></operation></binding><service name="Hello_Service"><documentation>WSDL File for HelloService</documentation><port binding="tns:Hello_Binding" name="Hello_Port"><soap:address location="http://localhost:51515/SayHello/" /></port></service></definitions>';
 
 //output the WSDL to console
 console.log(xml);
@@ -27,7 +26,6 @@ var MyService = {
 				var dbResults;
 				var itemsObject =[];
 
-				
 				console.log('Length: ' + length);
 
 				//Build SQL Statement and the Results Object Arguments Passed
@@ -102,15 +100,15 @@ app.get('/', function (request, response) {
    response.send("Hi There");
 });
 
-//Set the WSDL Request
+//Send the WSDL when requested
 app.get('/wsdl', function (request, response) {
    response.send(xml);
 });
 
-
+//Just a test 
 app.get('/db', function(request, response){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
-		client.query('SELECT * from test_table', function(err, result)
+		client.query('SELECT * from cust_price_table', function(err, result)
 		{
 			//done();
 			if (err){
@@ -123,5 +121,3 @@ app.get('/db', function(request, response){
 		});
 	});
 });
-
-//app.use('/soap', require('./lib/soaplistener.js')());*/
