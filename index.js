@@ -29,7 +29,7 @@ var MyService = {
 				console.log('Length: ' + length);
 
 				for (var i=0; i<length; i++){
-					SKUList += args.getQuoteOperationRequest.Items[i].SKU.$value + ',';
+					SKUList += "'" + args.getQuoteOperationRequest.Items[i].SKU.$value +"'" + ',';
 					console.log(i);
 					console.log(SKUList);
 				}
@@ -42,7 +42,6 @@ var MyService = {
 						client.query(queryString, function(err, result){
 							if (err){
 								console.error('DB Error: ' + err);
-								response.send("Error: " + err);
 							}
 							else{
 								resultString = JSON.stringify(result.rows)
