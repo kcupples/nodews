@@ -42,7 +42,7 @@ var MyService = {
 					});
 				}
 				SKUList = SKUList.substring(0, SKUList.length-1);
-				console.log('Stringify: ' JSON.stringify(itemsObject));
+				console.log('Stringify: ' +JSON.stringify(itemsObject));
 				console.log(SKUList);
 				queryString = ('SELECT SKU, PRICE from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' +"'" + args.getQuoteOperationRequest.CustomerNumber.$value +"'" + ' AND SALESORG=' +"'" + args.getQuoteOperationRequest.SalesOrg.$value +"'" + ' AND SKU IN (' +SKUList+')');
 				console.log(queryString);
