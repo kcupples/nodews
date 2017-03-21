@@ -20,7 +20,7 @@ var MyService = {
 			getQuoteOperation: function(args) {
 				console.log('GotIt');
 				return {
-				Items: {Item: [{SKU:55555,Quantity:5,Price: 524}, {SKU:66666,Quantity:6,Price: 624}]}
+				Items: {Item: [{SKU:55555,Quantity:5,Price: 524}, {SKU:66666,Quantity:6,Price: 625}]}
 					
 				};
 			}
