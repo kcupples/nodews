@@ -62,7 +62,7 @@ var MyService = {
 									console.log('Db: '+ dbResults[i].sku);
 									if (itemsObject[i].SKU == dbResults[i].sku){
 										console.log('Match');
-										itemsObject[i].Price = itemsObject[i].Quantity * dbResults[i].price;
+										itemsObject[i].Price = (itemsObject[i].Quantity * dbResults[i].price).toString();
 									}
 
 								}
