@@ -38,7 +38,7 @@ var MyService = {
 					{
 						Quantity: args.getQuoteOperationRequest.Items[i].Quantity.$value,
 						SKU: args.getQuoteOperationRequest.Items[i].SKU.$value,
-						Price: 0
+						Price: "55"
 					});
 				}
 				SKUList = SKUList.substring(0, SKUList.length-1);
