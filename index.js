@@ -39,7 +39,8 @@ var MyService = {
 					{
 						Quantity: args.getQuoteOperationRequest.Items[i].Quantity.$value,
 						SKU: args.getQuoteOperationRequest.Items[i].SKU.$value,
-						Price: "55"
+						TotalPrice: "55",
+						UnitPrice: "0"
 					});
 				}
 				SKUList = SKUList.substring(0, SKUList.length-1);
@@ -64,7 +65,8 @@ var MyService = {
 									console.log('Db: '+ dbResults[i].sku);
 									if (itemsObject[i].SKU == dbResults[i].sku){
 										console.log('Match');
-										itemsObject[i].Price = (itemsObject[i].Quantity * dbResults[i].price).toString();
+										itemsObject[i].TotalPrice = (itemsObject[i].Quantity * dbResults[i].price).toString();
+										itemsObject[i].UnitPrice = dbResults[i].price.toString();
 									}
 
 								}
@@ -126,9 +128,7 @@ app.get('/', function (request, response) {
    response.send("Hi There");
 });
 
-//app.listen(app.get('port'), function() {
-//  console.log('Node app is running on port', app.get('port'));
-//});
+
 
 app.get('/db', function(request, response){
 	pg.connect(process.env.DATABASE_URL, function(err, client, done){
