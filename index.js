@@ -50,7 +50,7 @@ var MyService = {
 
 					});
 				return {
-				Items: {Item: [resultString]}
+				Items: {Item: resultString}
 					
 				};
 			}
