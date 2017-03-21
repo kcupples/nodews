@@ -27,6 +27,7 @@ var MyService = {
 				var resultString = '';
 				var dbResults;
 				var itemsObject =[];
+				var pricedItems =[];
 				
 				console.log('Length: ' + length);
 
@@ -62,6 +63,11 @@ var MyService = {
 									console.log('Db: '+ dbResults[i].sku);
 									if (itemsObject[i].SKU == dbResults[i].sku){
 										console.log('Match');
+										pricedItems.push( {
+											Quantity: itemsObject[i].Quantity,
+											Price: itemsObject[i].Quantity * dbResults[i].price,
+											SKU: itemsObject[i].SKU
+										});
 										itemsObject[i].Price = (itemsObject[i].Quantity * dbResults[i].price).toString();
 									}
 
@@ -73,7 +79,7 @@ var MyService = {
 					});
 				return {
 
-				Items: {Item: itemsObject}
+				Items: {Item: pricedItems}
 					
 				};
 			}
