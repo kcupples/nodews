@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/getQuote/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="getQuote" targetNamespace="http://www.example.org/getQuote/">
-  <wsdl:message name="getQuoteOperationRequest">
-    <wsdl:part name="getQuoteOperationRequest" type="xsd:string"/>
+    <wsdl:types><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/getQuote/">
+	<xsd:complexType name="quoteRequest">
+
+		<xsd:sequence>
+			<xsd:element name="SalesOrg" type="xsd:string" minOccurs="1"
+				maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="CustomerNumber" type="xsd:string"></xsd:element>
+			<xsd:element name="Items" type="tns:Item" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Item">
+		<xsd:sequence>
+			<xsd:element name="SKU" type="xsd:string"></xsd:element>
+			<xsd:element name="Quantity" type="xsd:string"></xsd:element>
+			<xsd:element name="Price" type="xsd:string"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="quoteResponse">
+		<xsd:sequence>
+			<xsd:element name="Items" type="tns:Item" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema></wsdl:types>
+    <wsdl:message name="getQuoteOperationRequest">
+    <wsdl:part name="getQuoteOperationRequest" type="tns:quoteRequest"/>
   </wsdl:message>
   <wsdl:message name="getQuoteOperationResponse">
-    <wsdl:part name="getQuoteOperationResponse" type="xsd:string"/>
+    <wsdl:part name="getQuoteOperationResponse"
+    	type="tns:quoteResponse" />
   </wsdl:message>
   <wsdl:portType name="getQuote">
     <wsdl:operation name="getQuoteOperation">
