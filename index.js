@@ -103,7 +103,7 @@ app.get('/', function (request, response) {
 });
 
 //Set the WSDL Request
-app.get('/', function (request, response) {
+app.get('/wsdl', function (request, response) {
    response.send(xml);
 });
 
