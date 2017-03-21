@@ -26,6 +26,7 @@ var MyService = {
 				var queryString ='';
 				var resultString = '';
 				var dbResults;
+				var itemsObject =[];
 				
 				console.log('Length: ' + length);
 
@@ -33,10 +34,16 @@ var MyService = {
 					SKUList += "'" + args.getQuoteOperationRequest.Items[i].SKU.$value +"'" + ',';
 					console.log(i);
 					console.log(SKUList);
+					itemsObject.push(
+					{
+						Quantity: args.getQuoteOperationRequest.Items[i].Quantity.$value,
+						SKU: args.getQuoteOperationRequest.Items[i].SKU.$value,
+						Price: 0
+					});
 				}
 				SKUList = SKUList.substring(0, SKUList.length-1);
 				console.log(SKUList);
-				queryString = ('SELECT PRICE, SKU from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' +"'" + args.getQuoteOperationRequest.CustomerNumber.$value +"'" + ' AND SALESORG=' +"'" + args.getQuoteOperationRequest.SalesOrg.$value +"'" + ' AND SKU IN (' +SKUList+')');
+				queryString = ('SELECT SKU, PRICE from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' +"'" + args.getQuoteOperationRequest.CustomerNumber.$value +"'" + ' AND SALESORG=' +"'" + args.getQuoteOperationRequest.SalesOrg.$value +"'" + ' AND SKU IN (' +SKUList+')');
 				console.log(queryString);
 
 				pg.connect(process.env.DATABASE_URL, function(err, client, done){
