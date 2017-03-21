@@ -72,18 +72,22 @@ var MyService = {
 									}
 
 								}
+								console.log('Calculated Price: ' +JSON.stringify(itemsObject));
+								console.log('Calculated Price: ' +JSON.stringify(pricedItems));
 								return {
 
 				Items: {Item: pricedItems}
 					
 				};
-								console.log('Calculated Price: ' +JSON.stringify(itemsObject));
-								console.log('Calculated Price: ' +JSON.stringify(pricedItems));
 							}
 						});
 
 					});
-				
+				return {
+
+				Items: {Item: pricedItems}
+					
+				};
 			}
 		}
 	}
