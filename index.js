@@ -25,6 +25,7 @@ var MyService = {
 				var SKUList='';
 				var queryString ='';
 				var resultString = '';
+				var dbResults;
 				
 				console.log('Length: ' + length);
 
@@ -44,6 +45,7 @@ var MyService = {
 								console.error('DB Error: ' + err);
 							}
 							else{
+								dbResults = result.rows;
 								resultString = JSON.stringify(result.rows);
 								console.log('Returning: ' +resultString);
 							}
@@ -52,7 +54,7 @@ var MyService = {
 					});
 				return {
 
-				Items: {Item: resultString}
+				Items: {Item: dbResults}
 					
 				};
 			}
