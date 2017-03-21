@@ -18,10 +18,10 @@ console.log(xml);
 var MyService = {
 	getQuote: {
 		getQuoteSOAP : {
-			getQuoteOperation: function(args) {
+			getQuoteOperation: function(args, callback) {
 				console.log('In Web Service:');
 				
-				//Build SQL Statement from Arguments Passed
+				
 				var length = args.getQuoteOperationRequest.Items.length;
 				var SKUList='';
 				var queryString ='';
@@ -30,6 +30,7 @@ var MyService = {
 				
 				console.log('Length: ' + length);
 
+				//Build SQL Statement and the Results Object Arguments Passed
 				for (var i=0; i<length; i++){
 					SKUList += "'" + args.getQuoteOperationRequest.Items[i].SKU.$value +"'" + ',';
 					console.log(i);
@@ -47,7 +48,7 @@ var MyService = {
 				queryString = ('SELECT SKU, PRICE from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' +"'" + args.getQuoteOperationRequest.CustomerNumber.$value +"'" + ' AND SALESORG=' +"'" + args.getQuoteOperationRequest.SalesOrg.$value +"'" + ' AND SKU IN (' +SKUList+')');
 				console.log(queryString);
 
-				//Connect to the Database
+				//Query The Database
 				pg.connect(process.env.DATABASE_URL, function(err, client, done){
 						client.query(queryString, function(err, result){
 							if (err){
@@ -68,18 +69,15 @@ var MyService = {
 
 								}
 								console.log('Calculated Price: ' +JSON.stringify(itemsObject));
+								//Send the response with the callback function
+								callback({
+									Items: {Item: itemsObject}
+								});
 							}
 						});
 
 					});
-				setTimeout(function() {
-    				console.log('Blah blah blah blah extra-blah');
-				}, 3000);
-				return {
-
-				Items: {Item: itemsObject}
-					
-				};
+				 
 
 			}
 		}
