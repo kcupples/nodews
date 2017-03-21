@@ -122,9 +122,9 @@ var MyService = {
 
 
 
-//app.get('/', function (request, response) {
-   //response.send("Hi There");
-//});
+app.get('/', function (request, response) {
+   response.send("Hi There");
+});
 
 //app.listen(app.get('port'), function() {
 //  console.log('Node app is running on port', app.get('port'));
