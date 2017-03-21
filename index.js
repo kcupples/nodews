@@ -44,12 +44,14 @@ var MyService = {
 								console.error('DB Error: ' + err);
 							}
 							else{
-								resultString = JSON.stringify(result.rows)
+								resultString = JSON.stringify(result.rows);
+								console.log('Returning: ' +resultString);
 							}
 						});
 
 					});
 				return {
+
 				Items: {Item: resultString}
 					
 				};
