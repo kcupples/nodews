@@ -86,36 +86,26 @@ var MyService = {
 	}
 };
 
- 
-  server = app.listen((process.env.PORT || 5000), function () {
-      //var soapServer = soap.listen(app, '/SayHello', service, wsdl);
-      var soapServer = soap.listen(app, '/getQuoteOperation', MyService, xml);
-      url = 'http://' + server.address().address + ':' + server.address().port;
-      if (server.address().address === '0.0.0.0' || server.address().address === '::') {
-        url = 'http://127.0.0.1:' + server.address().port;
-      }
-    });
+//Configure the SOAP Listener 
+server = app.listen((process.env.PORT || 5000), function () {
+	//var soapServer = soap.listen(app, '/SayHello', service, wsdl);
+    var soapServer = soap.listen(app, '/getQuoteOperation', MyService, xml);
+    url = 'http://' + server.address().address + ':' + server.address().port;
+    if (server.address().address === '0.0.0.0' || server.address().address === '::') {
+    	url = 'http://127.0.0.1:' + server.address().port;
+    }
+});
   
- /*Call the SOAP listener using express
-  server = app.listen(8001, function(){
-      //Note: /wsdl route will be handled by soap module
-      //and all other routes & middleware will continue to work
-      var soapServer = soap.listen(app, '/getPrice', service, xml);
-      url = 'http://' +server.address().address + ':' + server.address().port;
-      console.log(url);
-      if (server.address().address === '::'){
-      	url = 'http://127.0.0.1:' + server.address().port;
-      	console.log(url);
-      }
-  });
-*/
 
-
-
+//Set the Home Page
 app.get('/', function (request, response) {
    response.send("Hi There");
 });
 
+//Set the WSDL Request
+app.get('/', function (request, response) {
+   response.send(xml);
+});
 
 
 app.get('/db', function(request, response){
