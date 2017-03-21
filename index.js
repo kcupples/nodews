@@ -35,7 +35,7 @@ var MyService = {
 				}
 				SKUList = SKUList.substring(0, SKUList.length-1);
 				console.log(SKUList);
-				queryString = ('SELECT PRICE, SKU from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' + args.getQuoteOperationRequest.CustomerNumber.$value + ' AND SALESORG=' + args.getQuoteOperationRequest.SalesOrg.$value + ' AND SKU IN (' +SKUList+')');
+				queryString = ('SELECT PRICE, SKU from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' +"'" + args.getQuoteOperationRequest.CustomerNumber.$value +"'" + ' AND SALESORG=' +"'" + args.getQuoteOperationRequest.SalesOrg.$value +"'" + ' AND SKU IN (' +SKUList+')');
 				console.log(queryString);
 
 				pg.connect(process.env.DATABASE_URL, function(err, client, done){
