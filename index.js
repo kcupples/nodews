@@ -41,7 +41,7 @@ var MyService = {
       }
     };
 
-  server = app.listen(51515, function () {
+  server = app.listen((process.env.PORT || 5000), function () {
       //var soapServer = soap.listen(app, '/SayHello', service, wsdl);
       var soapServer = soap.listen(app, '/getQuoteOperation', MyService, xml);
       url = 'http://' + server.address().address + ':' + server.address().port;
