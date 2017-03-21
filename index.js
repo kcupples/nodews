@@ -42,7 +42,7 @@ var MyService = {
 					});
 				}
 				SKUList = SKUList.substring(0, SKUList.length-1);
-				console.log('Stringify: ' +JSON.stringify(itemsObject));
+				
 				console.log(SKUList);
 				queryString = ('SELECT SKU, PRICE from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' +"'" + args.getQuoteOperationRequest.CustomerNumber.$value +"'" + ' AND SALESORG=' +"'" + args.getQuoteOperationRequest.SalesOrg.$value +"'" + ' AND SKU IN (' +SKUList+')');
 				console.log(queryString);
@@ -56,6 +56,13 @@ var MyService = {
 								dbResults = result.rows;
 								resultString = JSON.stringify(result.rows);
 								console.log('Returning: ' +resultString);
+								for (var i; i<itemsObject.length; i++){
+									if (itemsObject[i].SKU = dbResults[i].sku){
+										itemsObject[i].Price = itemsObject[i].Quantity * dbResults.price;
+									}
+
+								}
+								console.log('Calculated Price: ' +JSON.stringify(itemsObject));
 							}
 						});
 
