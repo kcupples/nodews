@@ -25,8 +25,10 @@ var MyService = {
 				var resultString = '';
 				var dbResults;
 				var itemsObject =[];
+				console.log("New WSDL");
 
 				console.log('Length: ' + length);
+				console.log(args);
 
 				//Build SQL Statement and the Results Object Arguments Passed
 				for (var i=0; i<length; i++){
