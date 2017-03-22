@@ -80,7 +80,7 @@ var MyService = {
 								console.log('Calculated Price: ' +JSON.stringify(itemsObject));
 								//Send the response with the callback function
 								callback({ 
-									Items: {Item: itemsObject}
+									{Items: itemsObject}
 								});
 							}
 						});
