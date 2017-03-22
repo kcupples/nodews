@@ -9,7 +9,9 @@ var xml = require('fs').readFileSync('./wsdl/getQuoteWorking.wsdl', 'utf8');
 
 
 //output the WSDL to console
+
 console.log(xml);
+console.log('New WSDL');
 
 //Set the services JSON object that is passed to the SOAP listener
 var MyService = {
@@ -17,28 +19,32 @@ var MyService = {
 		getQuoteSOAP : {
 			getQuoteOperation: function(args, callback) {
 				console.log('In Web Service:');
+				console.log('New WSDL');
+				//console.log(args);
+				console.log(args.Items)
+				console.log(args.Items.length);
 				
 				
-				var length = args.getQuoteOperationRequest.Items.length;
+				var length = args.Items.length;
 				var SKUList='';
 				var queryString ='';
 				var resultString = '';
 				var dbResults;
 				var itemsObject =[];
-				console.log("New WSDL");
+				console.log('New WSDL');
 
 				console.log('Length: ' + length);
 				console.log(args);
 
 				//Build SQL Statement and the Results Object Arguments Passed
 				for (var i=0; i<length; i++){
-					SKUList += "'" + args.getQuoteOperationRequest.Items[i].SKU.$value +"'" + ',';
+					SKUList += "'" + args.Items[i].SKU.$value +"'" + ',';
 					console.log(i);
 					console.log(SKUList);
 					itemsObject.push(
 					{
-						Quantity: args.getQuoteOperationRequest.Items[i].Quantity.$value,
-						SKU: args.getQuoteOperationRequest.Items[i].SKU.$value,
+						Quantity: args.Items[i].Quantity.$value,
+						SKU: args.Items[i].SKU.$value,
 						TotalPrice: "55",
 						UnitPrice: "0"
 					});
@@ -46,11 +52,12 @@ var MyService = {
 				SKUList = SKUList.substring(0, SKUList.length-1);
 				
 				console.log(SKUList);
-				queryString = ('SELECT SKU, PRICE from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' +"'" + args.getQuoteOperationRequest.CustomerNumber.$value +"'" + ' AND SALESORG=' +"'" + args.getQuoteOperationRequest.SalesOrg.$value +"'" + ' AND SKU IN (' +SKUList+')');
+				queryString = ('SELECT SKU, PRICE from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' +"'" + args.CustomerNumber.$value +"'" + ' AND SALESORG=' +"'" + args.SalesOrg.$value +"'" + ' AND SKU IN (' +SKUList+')');
 				console.log(queryString);
 
 				//Query The Database
 				pg.connect(process.env.DATABASE_URL, function(err, client, done){
+						console.log('Connected to DB');
 						client.query(queryString, function(err, result){
 							if (err){
 								console.error('DB Error: ' + err);
