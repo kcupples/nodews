@@ -97,15 +97,21 @@ var MyService = {
 								resultString = JSON.stringify(result.rows);
 								console.log('Returning: ' +resultString);
 								for (var i=0; i<itemsObject.length; i++){
-									console.log(i);
-									console.log('Object: ' + itemsObject[i].SKU);
-									console.log('Db: '+ dbResults[i].sku);
-									if (itemsObject[i].SKU == dbResults[i].sku){
-										console.log('Match');
-										itemsObject[i].TotalPrice = (itemsObject[i].Quantity * dbResults[i].price).toString();
-										itemsObject[i].UnitPrice = dbResults[i].price.toString();
-									}
+									for (var y=0; y<dbResults.length; y++){
+										console.log('Item Increment: ' +i);
+										console.log('DB Increment: ' +y);
+										console.log('Item SKU: ' + itemsObject[i].SKU);
+										console.log('Db SKU: '+ dbResults[y].sku);
+										
+										if (itemsObject[i].SKU == dbResults[y].sku){
+											console.log('Match');
+											itemsObject[i].TotalPrice = (itemsObject[i].Quantity * dbResults[y].price).toString();
+											itemsObject[i].UnitPrice = dbResults[y].price.toString();
+										}
 
+
+									}
+								
 								}
 								console.log('Calculated Price: ' +JSON.stringify(itemsObject));
 								//Send the response with the callback function
