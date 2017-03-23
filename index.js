@@ -56,10 +56,19 @@ var MyService = {
 
 				//Query The Database
 				pg.connect(process.env.DATABASE_URL, function(err, client, done){
+						if (err){
+							console.log('DB Connect Error: ' + err);
+							callback('DB Error: ' +err);
+						}
+						else
+						{
+
+
 						console.log('Connected to DB');
 						client.query(queryString, function(err, result){
 							if (err){
-								console.error('DB Error: ' + err);
+								console.error('DB Query Error: ' + err);
+								callback('DB Query Error: ' + err);
 							}
 							else{
 								dbResults = result.rows;
@@ -83,6 +92,7 @@ var MyService = {
 								});
 							}
 						});
+					}
 
 					});
 			}
