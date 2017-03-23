@@ -34,19 +34,41 @@ var MyService = {
 				
 				try {
 				console.log('Length: ' + length);
+				if (length===undefined){
+					length=1;
+				}
+
 				
 				//Build SQL Statement and the Results Object Arguments Passed
 				for (var i=0; i<length; i++){
-					SKUList += "'" + args.Items[i].SKU +"'" + ',';
-					console.log(i);
-					console.log(SKUList);
-					itemsObject.push(
+					
+					if (length >1)
 					{
-						Quantity: args.Items[i].Quantity,
-						SKU: args.Items[i].SKU,
-						TotalPrice: "55",
-						UnitPrice: "0"
-					});
+						SKUList += "'" + args.Items[i].SKU +"'" + ',';
+						console.log(i);
+						console.log(SKUList);
+						itemsObject.push(
+						{
+							Quantity: args.Items[i].Quantity,
+							SKU: args.Items[i].SKU,
+							TotalPrice: "55",
+							UnitPrice: "0"
+						});
+					}
+					else {
+						console.log('Only One Item');
+						console.log(SKUList);
+						SKUList += "'" + args.Items.SKU +"'" + ',';
+						itemsObject.push(
+						{
+							
+							Quantity: args.Items.Quantity,
+							SKU: args.Items.SKU,
+							TotalPrice: "55",
+							UnitPrice: "0"
+						});
+
+					}
 				}
 				SKUList = SKUList.substring(0, SKUList.length-1);
 				
@@ -68,7 +90,7 @@ var MyService = {
 						client.query(queryString, function(err, result){
 							if (err){
 								console.error('DB Query Error: ' + err);
-								callback('DB Query Error: ' + err);
+								callback('DB Query Error: ' + err + ': ' + queryString);
 							}
 							else{
 								dbResults = result.rows;
