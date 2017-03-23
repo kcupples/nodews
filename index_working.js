@@ -35,13 +35,13 @@ var MyService = {
 				
 				//Build SQL Statement and the Results Object Arguments Passed
 				for (var i=0; i<length; i++){
-					SKUList += "'" + args.Items[i].SKU +"'" + ',';
+					SKUList += "'" + args.Items[i].SKU.$value +"'" + ',';
 					console.log(i);
 					console.log(SKUList);
 					itemsObject.push(
 					{
-						Quantity: args.Items[i].Quantity,
-						SKU: args.Items[i].SKU,
+						Quantity: args.Items[i].Quantity.$value,
+						SKU: args.Items[i].SKU.$value,
 						TotalPrice: "55",
 						UnitPrice: "0"
 					});
@@ -49,7 +49,7 @@ var MyService = {
 				SKUList = SKUList.substring(0, SKUList.length-1);
 				
 				console.log(SKUList);
-				queryString = ('SELECT SKU, PRICE from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' +"'" + args.CustomerNumber +"'" + ' AND SALESORG=' +"'" + args.SalesOrg +"'" + ' AND SKU IN (' +SKUList+')');
+				queryString = ('SELECT SKU, PRICE from CUST_PRICE_TABLE WHERE CUSTOMERNUMBER=' +"'" + args.CustomerNumber.$value +"'" + ' AND SALESORG=' +"'" + args.SalesOrg.$value +"'" + ' AND SKU IN (' +SKUList+')');
 				console.log(queryString);
 
 				//Query The Database
