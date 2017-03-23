@@ -31,6 +31,8 @@ var MyService = {
 				var itemsObject =[];
 				console.log('New WSDL');
 
+				
+				try {
 				console.log('Length: ' + length);
 				
 				//Build SQL Statement and the Results Object Arguments Passed
@@ -83,6 +85,10 @@ var MyService = {
 						});
 
 					});
+			}
+			catch (err){
+				console.log('Error: ' + err);
+			}
 				 
 
 			}
