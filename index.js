@@ -97,7 +97,8 @@ var MyService = {
 					});
 			}
 			catch (err){
-				console.log('Error: ' + err);
+				console.log('Generic Error: ' + err);
+				callback('Generic Error: ' + err);
 			}
 				 
 
